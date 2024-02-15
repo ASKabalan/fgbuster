@@ -1,18 +1,25 @@
 # Design Document: fgbuster JAX Integration
 
-- [1. Overview](#1-overview)
-  - [1.1. Current Infrastructure](#11-current-infrastructure)
-- [2. Proposed Changes](#2-proposed-changes)
-  - [2.1. Transform inputs and analytic component arg to Pytrees **❌**](#21-transform-inputs-and-analytic-component-arg-to-pytrees-)
-  - [2.2. Transition to JAX  **✅**](#22-transition-to-jax--)
-  - [2.3. Ensure evaluation and diff evaluation is good on mixing matrix \[ \]](#23-ensure-evaluation-and-diff-evaluation-is-good-on-mixing-matrix--)
-  - [2.4. Einsum is not working with jax.numpy.einsum](#24-einsum-is-not-working-with-jaxnumpyeinsum)
-  - [2.5. Replace minimiser with optax.adam for testing](#25-replace-minimiser-with-optaxadam-for-testing)
-  - [2.6. Integrate Lineax for the matrix operation part](#26-integrate-lineax-for-the-matrix-operation-part)
+- [Design Document: fgbuster JAX Integration](#design-document-fgbuster-jax-integration)
+  - [1. Overview](#1-overview)
+  - [goal](#goal)
+    - [1.1. Current Infrastructure](#11-current-infrastructure)
+  - [2. Proposed Changes](#2-proposed-changes)
+    - [2.1. Transform inputs and analytic component arg to Pytrees **❌**](#21-transform-inputs-and-analytic-component-arg-to-pytrees-)
+    - [2.2. Transition to JAX  **✅**](#22-transition-to-jax--)
+    - [2.3. Ensure evaluation and diff evaluation is good on mixing matrix \[ \]](#23-ensure-evaluation-and-diff-evaluation-is-good-on-mixing-matrix--)
+    - [2.4. Einsum is not working with jax.numpy.einsum](#24-einsum-is-not-working-with-jaxnumpyeinsum)
+    - [Check pierre code](#check-pierre-code)
+    - [2.6. Integrate Lineax for the matrix operation part](#26-integrate-lineax-for-the-matrix-operation-part)
+    - [2.5. Replace minimiser with optax.adam for testing \[ON HOLD\]](#25-replace-minimiser-with-optaxadam-for-testing-on-hold)
 
 ## 1. Overview
 
 The primary objective of this project is to enhance the infrastructure of fgbuster, a component separation library for Cosmic Microwave Background (CMB) data analysis, by replacing the existing likelihood minimization with a JAX-based optimizer. This transition to JAX aims to leverage GPU capabilities for more efficient calculations, specifically utilizing the optax library, with a focus on the Adam optimizer.
+
+## goal
+
+snippet
 
 ### 1.1. Current Infrastructure
 
@@ -46,7 +53,13 @@ To be checked
 A possible solution could be to replace it with matmul and addition\
 Or even CuTensor from nvidia (rocmTensor from AMD)
 
-### 2.5. Replace minimiser with optax.adam for testing
-
+### Check pierre code
 
 ### 2.6. Integrate Lineax for the matrix operation part
+
+
+### 2.5. Replace minimiser with optax.adam for testing [ON HOLD]
+
+
+
+4 5,1 1,1

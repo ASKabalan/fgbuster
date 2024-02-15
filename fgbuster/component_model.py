@@ -33,7 +33,7 @@ import scipy
 from scipy import constants
 from astropy.cosmology import Planck15
 import jax
-from jax import jacrev, jit,grad
+from jax import jacrev, jit,grad,hessian
 from .utils import bandpass_integration, Lambdify, make_broadcastable,broadcasted
 
 __all__ = [
@@ -186,7 +186,9 @@ class Component(object):
         #     res.append([self._lambda_diff[i_p][j_p](nu, *new_params)
         #                 for j_p in range(self.n_param)])
         # return res
-        self._lambda_diff_diff(nu, *params)
+        #self._lambda_diff_diff(nu, *params)
+        argnums=tuple(range(1,len(params) + 1))
+        return hessian(self.eval,argnums)(nu,*params)
 
     @property
     def params(self):

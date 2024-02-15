@@ -75,6 +75,46 @@ def GetGrad(func, params):
     return grad_func
 
 def make_broadcastable_ndim(*args):
+    """
+    Make the input arrays broadcastable by adding dimensions as necessary.
+
+    Parameters
+    ----------
+    *args : ndarray
+        Variable number of input arrays.
+
+    Returns
+    -------
+    List of ndarray
+        List of broadcastable arrays.
+
+    Raises
+    ------
+    AssertionError
+        If any of the input arguments is not a NumPy array.
+
+    Notes
+    -----
+    This function inspects the dimensions of the input arrays and adds dimensions
+    as necessary to make them broadcastable. It uses the first array as the reference
+    for broadcasting.
+
+    Examples
+    --------
+    >>> import numpy as np
+    >>> a = np.array([1, 2, 3])
+    >>> b = np.array([[4], [5], [6]])
+    >>> c = np.array([7, 8, 9])
+    >>> make_broadcastable_ndim(a, b, c)
+    [array([[1, 1, 1],
+            [2, 2, 2],
+            [3, 3, 3]]), array([[4, 4, 4],
+                                [5, 5, 5],
+                                [6, 6, 6]]), array([[7, 7, 7],
+                                                    [8, 8, 8],
+                                                    [9, 9, 9]])]
+
+    """
     # Step 1: Inspect dimensions and prepare mapping
     chex.assert_tree_has_only_ndarrays(args)
 
